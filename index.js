@@ -30,13 +30,13 @@ app.get("/video", (req, res) => {
 
     const chunkSize = (end - start) + 1;
     // console.log("chunkSize", chunkSize)
-    const file = fs.createReadStream(videoPath);
+    const file = fs.createReadStream(videoPath, {start, end});
 
     console.log(`bytes ${start}-${end}/${fileSize}`)
     const header = {
       "Content-Range": `bytes ${start}-${end}/${fileSize}`,
       "Accept-Ranges": "bytes",
-      "Content-Length": chunkSize,
+      "Content-Length": 10 ** 6,
       "Content-Type": "video/mp4",
     };
 
